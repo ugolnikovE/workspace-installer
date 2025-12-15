@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 check_sudo() {
   if [ "$(id -u)" -ne 0 ]; then
@@ -29,4 +29,19 @@ detect_pm() {
   else
     echo "Unknown"
   fi
+}
+
+confirm_install() {
+  local title="$1"
+  shift
+  local packages=("$@")
+  
+  echo "$title"
+  echo "================================="
+  for pkg in "${packages[@]}"; do
+    echo " - $pkg"
+  done
+  echo
+  read -rp "Continue? [y/N]: " ans
+  [[ "$ans" =~ ^[Yy]$ ]]
 }
