@@ -65,22 +65,37 @@ install_dev_tools() {
 
 # Lua ecosystem installation
 install_lua_ecosystem() {
-  echo "Installing Lua Ecosystem..."
+  local common=(luarocks)
+  local specific=()
+  case $PM in
+    apt) specific=(lua5.4 luajit);;
+    yum|dnf) specific=(lua lua-luajit);;
+    pacman) specific=(lua luajit);;
+  esac
+  install_packages "Lua Ecosystem" common[@] specific[@]
 }
 
 # Common utilities installation
 install_utilities() {
-  echo "Installing utilities..."
+  local common=(tmux wget curl nano sudo mc)
+  install_packages "Utilities" common[@] specific[@]
 }
 
 # Docker installation
 install_docker() {
-  echo "Installing docker..."
+  local common=(docker-compose)
+  local specific=()
+  case $PM in
+    apt) specific=(docker.io);;
+    yum|dnf|pacman) specific=(docker);;
+  esac
+  install_packages "Docker" common[@] specific[@]
 }
 
 # Verilog tools installation
 install_verilog() {
-  echo "Installing verilog..."
+  local common=(iverilog)
+  install_packages "Verilog tools" common[@] specific[@]
 }
 
 # Show interactive menu
