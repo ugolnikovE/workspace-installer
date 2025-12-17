@@ -35,23 +35,32 @@ prepare_system() {
   fi
 }
 
-# Development tools installation
-install_dev_tools() {
-  local packages
-  case $PM in
-    apt)
-      packages=(gcc gdb cmake make build-essential);;
-    yum|dnf)
-      packages=(gcc gdb cmake make);;
-    pacman)
-      packages=(gcc gdb cmake make);;
-  esac
-
-  if confirm_install "Installing development tools" "${packages[@]}"; then
+# Install common and specific packages
+install_packages() {
+  local category="$1"
+  shift
+  local common=("${!1}")
+  local specific=("${!2}")
+  
+  local packages=("${common[@]}" "${specific[@]}")
+  
+  if confirm_install "Installing $category" "${packages[@]}"; then
     pm_install "${packages[@]}"
   else
-    echo "Skipped."
+    echo "Skipped $category."
   fi
+}
+
+# Development tools installation
+install_dev_tools() {
+  local common=(gcc gbd cmake make)
+  local specific=()
+  case $PM in
+    apt) specific=(build-essential);;
+    yum|dnf) specific=(kernel-devel);;
+    pacman) specific=(base-devel);;
+  esac
+  install_packages "Development Tools" common[@] specific[@]
 }
 
 # Lua ecosystem installation
