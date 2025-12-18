@@ -32,11 +32,13 @@ case "$OS" in
     ;;
 esac
 
+# Detect ARCH
+ARCH="$(uname -m)"
+
 # Print detected vars
 echo "Detected OS: ${OS}"
+echo "Detected arch: ${ARCH}"
 echo "Choosen script: ${SCRIPT}"
-echo "================================="
-echo -e ""
 
 # Run OS-spec script
 . "$SCRIPT"

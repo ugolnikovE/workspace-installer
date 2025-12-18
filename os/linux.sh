@@ -6,9 +6,6 @@ if [ -z "$WORKSPACE_INSTALLER" ]; then
   exit 1;
 fi
 
-# Linux installer entry
-echo "Start installing on Linux"
-
 # Linux requires root privileges
 check_sudo
 
@@ -41,9 +38,9 @@ install_packages() {
   shift
   local common=("${!1}")
   local specific=("${!2}")
-  
+
   local packages=("${common[@]}" "${specific[@]}")
-  
+
   if confirm_install "Installing $category" "${packages[@]}"; then
     pm_install "${packages[@]}"
   else
@@ -53,7 +50,7 @@ install_packages() {
 
 # Development tools installation
 install_dev_tools() {
-  local common=(gcc gbd cmake make)
+  local common=(gcc gdb cmake make neovim)
   local specific=()
   case $PM in
     apt) specific=(build-essential);;
@@ -100,7 +97,6 @@ install_verilog() {
 
 # Show interactive menu
 show_menu() {
-  clear
   echo "================================="
   echo "  workspace-installer Linux"
   echo "================================="
@@ -121,6 +117,7 @@ while true; do
   show_menu
   read -r choice
   case "$choice" in
+    1) prepare_system;;
     2) install_dev_tools;;
     3) install_lua_ecosystem;;
     4) install_utilities;;
@@ -137,4 +134,5 @@ while true; do
   esac
   echo "Press Enter to continue..."
   read -r
+  clear
 done
