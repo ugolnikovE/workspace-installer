@@ -32,25 +32,9 @@ prepare_system() {
   fi
 }
 
-# Install common and specific packages
-install_packages() {
-  local category="$1"
-  shift
-  local common=("${!1}")
-  local specific=("${!2}")
-
-  local packages=("${common[@]}" "${specific[@]}")
-
-  if confirm_install "Installing $category" "${packages[@]}"; then
-    pm_install "${packages[@]}"
-  else
-    echo "Skipped $category."
-  fi
-}
-
 # Development tools installation
 install_dev_tools() {
-  local common=(gcc gdb cmake make neovim)
+  local common=(gcc gdb cmake make neovim git)
   local specific=()
   case $PM in
     apt) specific=(build-essential);;

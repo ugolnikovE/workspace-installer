@@ -9,19 +9,6 @@ fi
 # Load package manager implementation
 . "$INSTALLER_ROOT/pm/brew.sh"
 
-# Install packages
-install_packages() {
-  local category="$1"
-  shift
-  local packages=("${!1}")
-
-  if confirm_install "Installing $category" "${packages[@]}"; then
-    pm_install "${packages[@]}"
-  else
-    echo "Skipped $category."
-  fi
-}
-
 # brew package manager installation
 install_brew() {
   if confirm_install "Installing brew package manager"; then

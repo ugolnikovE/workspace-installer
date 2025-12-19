@@ -35,7 +35,7 @@ confirm_install() {
   local title="$1"
   shift
   local packages=("$@")
-  
+
   echo "$title"
   echo "================================="
   for pkg in "${packages[@]}"; do
@@ -44,4 +44,17 @@ confirm_install() {
   echo
   read -rp "Continue? [y/N]: " ans
   [[ "$ans" =~ ^[Yy]$ ]]
+}
+
+# Install packages (need load package manager implementation)
+install_packages() {
+  local category="$1"
+  shift
+  local packages=("${!1}")
+
+  if confirm_install "Installing $category" "${packages[@]}"; then
+    pm_install "${packages[@]}"
+  else
+    echo "Skipped $category."
+  fi
 }
