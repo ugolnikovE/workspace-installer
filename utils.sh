@@ -50,7 +50,16 @@ confirm_install() {
 install_packages() {
   local category="$1"
   shift
-  local packages=("${!1}")
+
+  local common=("${!1}")
+  shift
+
+  local specific=()
+  if [[ -n "$1" ]]; then
+    specific=("${!1}")
+  fi
+
+  local packages=("${common[@]}" "${specific[@]}")
 
   if confirm_install "Installing $category" "${packages[@]}"; then
     pm_install "${packages[@]}"

@@ -12,7 +12,7 @@ fi
 # brew package manager installation
 install_brew() {
   if confirm_install "Installing brew package manager"; then
-    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   else
     echo "Skipped installing brew."
   fi
@@ -30,7 +30,7 @@ install_command_line_tools() {
 # Development tools installation
 install_dev_tools() {
   local packages=(cmake neovim)
-
+  install_packages "Development Tools" packages[@]
 }
 
 # Lua ecosystem installation
@@ -47,7 +47,7 @@ install_utilities() {
 
 # Verilog tools installation
 install_verilog() {
-  local packages=("icarus-verilog")
+  local packages=(icarus-verilog)
   install_packages "Verilog tools" packages[@]
 }
 
@@ -58,13 +58,14 @@ show_menu() {
   echo "================================="
   echo "1) Brew package manager (recommended)"
   echo "2) Xcode command-line Tools"
-  echo "3) Lua Ecosystem"
-  echo "4) Utilities"
-  echo "5) Verilog"
-  echo "6) Install All"
+  echo "3) Development Tools"
+  echo "4) Lua Ecosystem"
+  echo "5) Utilities"
+  echo "6) Verilog"
+  echo "7) Install All"
   echo "0) Exit"
   echo "================================="
-  echo -n "Enter your choice [0-6]: "
+  echo -n "Enter your choice [0-7]: "
 }
 
 # Main menu loop
@@ -74,19 +75,20 @@ while true; do
   case "$choice" in
     1) install_brew;;
     2) install_command_line_tools;;
-    3) install_lua_ecosystem;;
-    4) install_utilities;;
-    5) install_verilog;;
-    6) install_brew
+    3) install_dev_tools;;
+    4) install_lua_ecosystem;;
+    5) install_utilities;;
+    6) install_verilog;;
+    7) install_brew
        install_command_line_tools
+       install_dev_tools
        install_lua_ecosystem
        install_utilities
        install_verilog;;
     0) exit 0;;
     *) echo "Invalid choice";;
   esac
-  echo -e ""
-  echo "Press Enter to continue..."
-  read -r
+  echo
+  read -rp "Press Enter to continue..."
   clear
 done

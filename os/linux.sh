@@ -34,7 +34,7 @@ prepare_system() {
 
 # Development tools installation
 install_dev_tools() {
-  local common=(gcc gdb cmake make neovim git)
+  local common=(gcc gdb cmake neovim git)
   local specific=()
   case $PM in
     apt) specific=(build-essential);;
@@ -59,7 +59,7 @@ install_lua_ecosystem() {
 # Common utilities installation
 install_utilities() {
   local common=(tmux wget curl nano sudo mc)
-  install_packages "Utilities" common[@] specific[@]
+  install_packages "Utilities" common[@]
 }
 
 # Docker installation
@@ -76,7 +76,7 @@ install_docker() {
 # Verilog tools installation
 install_verilog() {
   local common=(iverilog)
-  install_packages "Verilog tools" common[@] specific[@]
+  install_packages "Verilog tools" common[@]
 }
 
 # Show interactive menu
@@ -116,7 +116,7 @@ while true; do
     0) exit 0;;
     *) echo "Invalid choice";;
   esac
-  echo "Press Enter to continue..."
-  read -r
+  echo
+  read -rp "Press Enter to continue..."
   clear
 done
