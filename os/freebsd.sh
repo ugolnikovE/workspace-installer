@@ -12,6 +12,19 @@ check_sudo
 # Load package manager implementation
 . "$INSTALLER_ROOT/pm/pkg.sh"
 
+# Install single array packages
+install_packages() {
+  local category="$1"
+  shift
+  local packages=("${!1}")
+
+  if confirm_install "Installing $category" "${packages[@]}"; then
+    pm_install "${packages[@]}"
+  else
+    echo "Skipped $category."
+  fi
+}
+
 # pkg package manager installation
 install_pkg() {
   if confirm_install "Installing pkg package manager"; then
@@ -24,19 +37,19 @@ install_pkg() {
 # Development tools installation
 install_dev_tools() {
   local packages=(gcc gdb cmake gmake neovim git)
-  install_packages "Development Tools" packages[@]
+  install_packages "Development Tools" packages ""
 }
 
 # Lua ecosystem installation
 install_lua_ecosystem() {
   local packages=(lua54 luajit lua54-luarocks)
-  install_packages "Lua Ecosystem" packages[@]
+  install_packages "Lua Ecosystem" packages ""
 }
 
 # Common utilities installation
 install_utilities() {
   local packages=(tmux wget curl nano sudo mc)
-  install_packages "Utilities" packages[@]
+  install_packages "Utilities" packages ""
 }
 
 # Show interactive menu

@@ -45,25 +45,3 @@ confirm_install() {
   read -rp "Continue? [y/N]: " ans
   [[ "$ans" =~ ^[Yy]$ ]]
 }
-
-# Install packages (need load package manager implementation)
-install_packages() {
-  local category="$1"
-  shift
-
-  local common=("${!1}")
-  shift
-
-  local specific=()
-  if [[ -n "$1" ]]; then
-    specific=("${!1}")
-  fi
-
-  local packages=("${common[@]}" "${specific[@]}")
-
-  if confirm_install "Installing $category" "${packages[@]}"; then
-    pm_install "${packages[@]}"
-  else
-    echo "Skipped $category."
-  fi
-}

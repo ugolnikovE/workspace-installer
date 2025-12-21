@@ -19,6 +19,22 @@ fi
 # Load package manager implementation
 . "$INSTALLER_ROOT/pm/$PM.sh"
 
+# Install common and specific packages
+install_packages() {
+  local category="$1"
+  shift
+  local common=("${!1}")
+  local specific=("${!2}")
+
+  local packages=("${common[@]}" "${specific[@]}")
+
+  if confirm_install "Installing $category" "${packages[@]}"; then
+    pm_install "${packages[@]}"
+  else
+    echo "Skipped $category."
+  fi
+}
+
 # System update & upgrade
 prepare_system() {
   echo "System update & upgrade"
@@ -59,7 +75,7 @@ install_lua_ecosystem() {
 # Common utilities installation
 install_utilities() {
   local common=(tmux wget curl nano sudo mc)
-  install_packages "Utilities" common[@]
+  install_packages "Utilities" common[@] specific[@]
 }
 
 # Docker installation
@@ -76,7 +92,7 @@ install_docker() {
 # Verilog tools installation
 install_verilog() {
   local common=(iverilog)
-  install_packages "Verilog tools" common[@]
+  install_packages "Verilog tools" common[@] specific[@]
 }
 
 # Show interactive menu
