@@ -1,4 +1,4 @@
-# 🛠️ Workspace Installer
+# 🛠️ workspace-installer
 
 A small, modular Bash-based workspace bootstrapper for Unix-like systems.
 
