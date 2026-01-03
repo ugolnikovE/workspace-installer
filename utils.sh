@@ -45,3 +45,36 @@ confirm_install() {
   read -rp "Continue? [y/N]: " ans
   [[ "$ans" =~ ^[Yy]$ ]]
 }
+
+install_dotfiles() {
+  echo "Installing dotfiles..."
+
+  if [ -n "$SUDO_USER" ]; then
+    USER_OWNER="$SUDO_USER"
+  else
+    USER_OWNER="$USER"
+  fi
+
+  if [ "$OS" = "Darwin" ]; then
+    USER_GROUP="staff"
+  else
+    USER_GROUP="$USER_OWNER"
+  fi
+
+  TARGET_HOME=$(eval echo "~$USER_OWNER")
+
+  echo "Target home directory: $TARGET_HOME"
+  echo "Installing as user: $USER_OWNER"
+
+  mkdir -p "$TARGET_HOME/.config/nvim"
+
+  ln -sf "$INSTALLER_ROOT/dotfiles/nvim/init.lua" "$TARGET_HOME/.config/nvim/init.lua"
+  ln -sf "$INSTALLER_ROOT/dotfiles/nvim/lua" "$TARGET_HOME/.config/nvim/lua"
+
+  ln -sf "$INSTALLER_ROOT/dotfiles/tmux/tmux.conf" "$TARGET_HOME/.tmux.conf"
+
+  chown -R "$USER_OWNER":"$USER_GROUP" "$TARGET_HOME/.config/nvim"
+  chown "$USER_OWNER":"$USER_GROUP" "$TARGET_HOME/.tmux.conf"
+
+  echo "Dotfiles installed successfully!"
+}

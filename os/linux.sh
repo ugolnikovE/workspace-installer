@@ -106,10 +106,11 @@ show_menu() {
   echo "4) Utilities"
   echo "5) Docker"
   echo "6) Verilog"
-  echo "7) Install All"
+  echo "7) Install dotfiles"
+  echo "8) Install All"
   echo "0) Exit"
   echo "================================="
-  echo -n "Enter your choice [0-7]: "
+  echo -n "Enter your choice [0-8]: "
 }
 
 # Main menu loop
@@ -123,12 +124,14 @@ while true; do
     4) install_utilities;;
     5) install_docker;;
     6) install_verilog;;
-    7) prepare_system
+    7) install_dotfiles;;
+    8) prepare_system
        install_dev_tools
        install_lua_ecosystem
        install_utilities
        install_docker
-       install_verilog;;
+       install_verilog
+       install_dotfiles;;
     0) exit 0;;
     *) echo "Invalid choice";;
   esac

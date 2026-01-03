@@ -61,10 +61,11 @@ show_menu() {
   echo "2) Development Tools"
   echo "3) Lua Ecosystem"
   echo "4) Utilities"
-  echo "5) Install All"
+  echo "5) Install dotfiles"
+  echo "6) Install All"
   echo "0) Exit"
   echo "================================="
-  echo -n "Enter your choice [0-5]: "
+  echo -n "Enter your choice [0-6]: "
 }
 
 # Main menu loop
@@ -76,10 +77,12 @@ while true; do
     2) install_dev_tools;;
     3) install_lua_ecosystem;;
     4) install_utilities;;
-    5) install_pkg
+    5) install_dotfiles;;
+    6) install_pkg
        install_dev_tools
        install_lua_ecosystem
-       install_utilities;;
+       install_utilities
+       install_dotfiles;;
     0) exit 0;;
     *) echo "Invalid choice";;
   esac
