@@ -11,6 +11,7 @@ This project was originally created for personal use to quickly reproduce a work
   - OS-specific logic
   - Package manager implementations
   - Shared utilities
+  - Dotfiles deployment
 - Designed to be easy to read, modify, and extend
 
 ## 🧩 Architecture
@@ -21,15 +22,35 @@ The installer uses a simple, modular structure:
 - Runtime OS detection
 - Package manager abstraction layer
 - OS-specific scripts loaded dynamically
+- Dotfiles installation with automatic symlinks and correct ownership
 
 ```text
 .
 ├── install.sh          # Entry point
 ├── utils.sh            # Shared helper functions
+├── dotfiles/           # Configuration files
+│   ├── nvim/
+│   │   ├── init.lua
+│   │   └── lua/
+│   │       ├── core/
+│   │       │   ├── keymaps.lua
+│   │       │   ├── lazy.lua
+│   │       │   └── options.lua
+│   │       └── plugins/
+│   │           ├── bufferline.lua
+│   │           ├── cmp.lua
+│   │           ├── lsp.lua
+│   │           ├── lualine.lua
+│   │           ├── nvim-tree.lua
+│   │           ├── themes.lua
+│   │           ├── toggleterm.lua
+│   │           └── treesitter.lua
+│   └── tmux/
+│       └── tmux.conf
 ├── os/
-│   ├── linux.sh        # Linux-specific logic
-│   ├── freebsd.sh      # FreeBSD-specific logic
-│   └── macos.sh        # macOS-specific logic
+│   ├── linux.sh
+│   ├── freebsd.sh
+│   └── macos.sh
 └── pm/
     ├── apt.sh
     ├── brew.sh
@@ -61,6 +82,7 @@ serving as a practical way to improve my Bash scripting and system-level skills.
 
 This project modifies system state.
 Review and adapt the source code before running it on your system.
+Symlinks will overwrite existing config files in the user's home directory.
 
 ## 📄 License
 
