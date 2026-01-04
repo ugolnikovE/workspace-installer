@@ -84,7 +84,6 @@ return {
         mirage = true,
         overrides = {},
       })
-      vim.cmd("colorscheme ayu")
     end,
   },
 }
