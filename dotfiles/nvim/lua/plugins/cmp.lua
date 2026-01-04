@@ -1,46 +1,55 @@
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+return {
+  "hrsh7th/nvim-cmp",
+  dependencies = {
+    "L3MON4D3/LuaSnip",
+    "hrsh7th/cmp-nvim-lsp",
   },
+  config = function()
+    local cmp = require("cmp")
+    local luasnip = require("luasnip")
 
-  mapping = {
-    ["<Up>"] = cmp.mapping.select_prev_item(),
-    ["<Down>"] = cmp.mapping.select_next_item(),
+    cmp.setup({
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
 
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.confirm({ select = true })
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+      mapping = {
+        ["<Up>"] = cmp.mapping.select_prev_item(),
+        ["<Down>"] = cmp.mapping.select_next_item(),
 
-    ["<S-Tab>"] = cmp.mapping(function()
-      if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      end
-    end, { "i", "s" }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.confirm({ select = true })
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
 
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<S-Tab>"] = cmp.mapping(function()
+          if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          end
+        end, { "i", "s" }),
 
-    ["<Esc>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.abort()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  },
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
 
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-  }),
-})
+        ["<Esc>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.abort()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      },
+
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+      }),
+    })
+  end,
+}
