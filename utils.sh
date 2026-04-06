@@ -80,8 +80,15 @@ install_dotfiles() {
     ln -sf "$INSTALLER_ROOT/dotfiles/ghostty/config.ghostty" "$TARGET_HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
     ln -sf "$INSTALLER_ROOT/dotfiles/aerospace/aerospace.toml" "$TARGET_HOME/.aerospace.toml"
 
+    mkdir -p "$TARGET_HOME/.config/sketchybar"
+    ln -sf "$INSTALLER_ROOT/dotfiles/sketchybar/plugins" "$TARGET_HOME/.config/sketchybar/plugins"
+    ln -sf "$INSTALLER_ROOT/dotfiles/sketchybar/sketchybarrc" "$TARGET_HOME/.config/sketchybar/sketchybarrc"
+
     chown "$USER_OWNER":"$USER_GROUP" "$TARGET_HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
     chown "$USER_OWNER":"$USER_GROUP" "$TARGET_HOME/.aerospace.toml"
+
+    chown -R "$USER_OWNER":"$USER_GROUP" "$TARGET_HOME/.config/sketchybar"
+    chmod +x -R "$TARGET_HOME/.config/sketchybar/plugins"
   fi
 
   echo "Dotfiles installed successfully!"
