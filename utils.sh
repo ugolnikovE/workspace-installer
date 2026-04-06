@@ -75,6 +75,12 @@ install_dotfiles() {
 
   chown -R "$USER_OWNER":"$USER_GROUP" "$TARGET_HOME/.config/nvim"
   chown "$USER_OWNER":"$USER_GROUP" "$TARGET_HOME/.tmux.conf"
+  
+  if [ "$OS" = "Darwin" ]; then
+    ln -sf "$INSTALLER_ROOT/dotfiles/ghostty/config.ghostty" "$TARGET_HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty" 
+  
+    chown "$USER_OWNER":"$USER_GROUP" "$TARGET_HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+  fi
 
   echo "Dotfiles installed successfully!"
 }
