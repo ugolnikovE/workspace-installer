@@ -25,6 +25,7 @@ for sid in 1 2; do
                    icon="$sid" \
                    icon.padding_left=7 \
                    icon.padding_right=7 \
+                   icon.font="Hack Nerd Font Mono:Bold:13.0" \
                    background.color=0x00ffffff \
                    background.corner_radius=5 \
                    background.height=25 \
