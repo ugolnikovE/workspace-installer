@@ -9,8 +9,8 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = {
+	lualine_b = { "branch" },
+	lualine_c = {
           {
             "filename",
             path = 1,
@@ -18,8 +18,6 @@ return {
           },
         },
         lualine_x = {
-          "encoding",
-          "fileformat",
           {
             "filetype",
             fmt = function(type)
@@ -27,10 +25,8 @@ return {
             end,
           },
         },
-        lualine_y = { "progress" },
         lualine_z = { "location" },
       },
-      extensions = { "fugitive", "nvim-tree" },
     })
   end,
 }

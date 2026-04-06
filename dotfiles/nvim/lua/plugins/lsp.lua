@@ -12,7 +12,7 @@ return {
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      local servers = { "clangd", "rust_analyzer", "lua_ls" }
+      local servers = { "clangd", "rust_analyzer", "lua_ls", "bashls" }
 
       for _, server in ipairs(servers) do
         if lspconfig[server] then

@@ -13,12 +13,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  require("plugins.lsp"),
   require("plugins.cmp"),
   require("plugins.treesitter"),
-  require("plugins.nvim-tree"),
-  require("plugins.toggleterm"),
-  require("plugins.bufferline"),
   require("plugins.lualine"),
-  require("plugins.themes"),
+  require("plugins.oil"),
+  require("plugins.ayu"),
 })

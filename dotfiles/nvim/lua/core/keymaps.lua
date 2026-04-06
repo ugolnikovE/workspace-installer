@@ -1,20 +1,10 @@
 vim.g.mapleader = " "
 
 -- File explorer
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>")
 
--- Buffers
-vim.keymap.set("n", "<S-l>", ":bnext<CR>")
-vim.keymap.set("n", "<S-h>", ":bprevious<CR>")
-
--- Clipboard
-vim.keymap.set("v", "<C-c>", '"+y')
-vim.keymap.set("n", "<C-v>", '"+p')
-vim.keymap.set("i", "<C-v>", '<Esc>"+pa')
-
--- Undo
-vim.keymap.set({ "n", "v" }, "<C-z>", "u", { silent = true })
-vim.keymap.set("i", "<C-z>", "<C-o>u", { silent = true })
+vim.keymap.set({"n", "v"}, "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>p", '"+p')
 
 -- LSP
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
