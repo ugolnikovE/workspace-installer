@@ -3,6 +3,7 @@ vim.g.mapleader = " "
 -- File explorer
 vim.keymap.set("n", "<leader>e", "<cmd>Oil<CR>")
 
+-- Clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>p", '"+p')
 

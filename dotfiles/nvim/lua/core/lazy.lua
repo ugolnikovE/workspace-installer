@@ -17,5 +17,6 @@ require("lazy").setup({
   require("plugins.treesitter"),
   require("plugins.lualine"),
   require("plugins.oil"),
+  require("plugins.wakatime"),
   require("plugins.ayu"),
 })
