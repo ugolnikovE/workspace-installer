@@ -1,5 +1,4 @@
 start-at-login = true
-exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change']
 after-startup-command = ['exec-and-forget open -n -a Ghostty && sleep 1 && open -n -a Ghostty']
 
 [gaps]
